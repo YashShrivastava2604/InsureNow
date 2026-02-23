@@ -39,7 +39,8 @@ export default function Home() {
           transition={{ delay: 0.1 }}
           className="text-xl text-[rgb(var(--muted-foreground))] max-w-2xl mx-auto"
         >
-          Compare plans, calculate premiums, and manage claims. 
+          Compare plans, calculate premiums, and manage claims.
+	  <br />
           Paperless, Instant, and Designed for You
         </motion.p>
       </div>
