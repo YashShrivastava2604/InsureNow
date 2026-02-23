@@ -44,5 +44,5 @@ jobs:
             KUBECTL=$(readlink -f $(which kubectl))
             
             # 3. Use standard bash variable syntax ($VERSION) on the remote server
-            $KUBECTL set image deployment/backend backend=yash4200/insurance-backend:latest
-            $KUBECTL set image deployment/frontend frontend=yash4200/insurance-frontend:latest
+            $KUBECTL set image deployment/backend backend=yash4200/insurance-backend:$VERSION
+            $KUBECTL set image deployment/frontend frontend=yash4200/insurance-frontend:$VERSION
