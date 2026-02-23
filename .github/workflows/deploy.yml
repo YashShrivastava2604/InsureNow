@@ -15,10 +15,10 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build backend image
-        run: docker build --no-chache -t yash4200/insurance-backend:latest ./backend
+        run: docker build --no-cache -t yash4200/insurance-backend:latest ./backend
 
       - name: Build frontend image
-        run: docker build --no-chache -t yash4200/insurance-frontend:latest ./frontend
+        run: docker build --no-cache -t yash4200/insurance-frontend:latest ./frontend
 
       - name: Push backend image
         run: docker push yash4200/insurance-backend:latest
