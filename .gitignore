@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Env files
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large files
+*.log
+*.zip
+*.tar
+*.gz
