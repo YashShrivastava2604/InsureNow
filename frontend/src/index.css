@@ -44,7 +44,7 @@
 /* Global Resets */
 * {
   border-color: rgb(var(--border));
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  /* transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; */
 }
 
 body {
@@ -74,4 +74,19 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Custom Chat Scrollbar */
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--muted-foreground), 0.2);
+  border-radius: 10px;
+}
+.chat-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--muted-foreground), 0.4);
 }

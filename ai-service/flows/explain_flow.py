@@ -43,24 +43,24 @@ def explain_flow(query: str, session: dict) -> dict:
             session["last_topic"] = topic
             print("[MEMORY] Updated topic:", topic)
 
-        # -----------------------------
         # STEP 1 — RAG
-        # -----------------------------
         print("\n[STEP 1] Retrieving context...")
         chunks = retrieve(query)
         context = "\n".join(chunks)
 
-        # -----------------------------
-        # STEP 2 — CREW AI
-        # -----------------------------
-        print("\n[STEP 2] Running CrewAI...")
-        explanation = run_explain_agents(query, context)
+        # NEW: Extract conversation history (excluding the current prompt)
+        history_list = session.get("history", [])[:-1] 
+        history_text = "\n".join([f"{msg['role'].capitalize()}: {msg['content']}" for msg in history_list])
+        if not history_text:
+            history_text = "No previous history."
 
-        # -----------------------------
+        # STEP 2 — CREW AI
+        print("\n[STEP 2] Running CrewAI...")
+        explanation = run_explain_agents(query, context, history_text)
+
         # STEP 3 — IMAGE
-        # -----------------------------
         print("\n[STEP 3] Generating image...")
-        image = generate_insurance_image(query)
+        image = generate_insurance_image(query, explanation)
 
         if not image:
             print("[IMAGE] Using fallback")

@@ -1,14 +1,14 @@
 import httpx
+import os
 
-# CHANGE this to your backend URL
-BASE_URL = "http://localhost:5000/api"
+BASE_URL = os.getenv("BACKEND_URL", "http://backend:5000") + "/api"
 
 
 async def get_plans(insurance_type: str):
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                f"{BASE_URL}/plans",
+                f"{BASE_URL}/buy",
                 params={"type": insurance_type}
             )
 

@@ -7,16 +7,12 @@ from crewai import Agent, Task, Crew, LLM
 
 load_dotenv()
 
-# -----------------------------
 # GROQ CLIENT
-# -----------------------------
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 MODEL = "llama-3.3-70b-versatile"
 
-# -----------------------------
 # CREWAI LLM WRAPPER
-# -----------------------------
 llm = LLM(model=MODEL)
 
 
@@ -66,10 +62,8 @@ def groq_call(self, prompt, **kwargs):
 llm.call = groq_call.__get__(llm, LLM)
 
 
-# -----------------------------
 # CREW EXECUTION
-# -----------------------------
-def run_explain_agents(query: str, context: str):
+def run_explain_agents(query: str, context: str, history: str):
     try:
         print("\n🚀 Crew Execution Started")
 
@@ -84,9 +78,7 @@ def run_explain_agents(query: str, context: str):
             verbose=True
         )
 
-        # -----------------------------
         # Agent 2: Advisor
-        # -----------------------------
         advisor = Agent(
             role="Insurance Advisor",
             goal="Explain clearly and concisely",
@@ -95,9 +87,7 @@ def run_explain_agents(query: str, context: str):
             verbose=True
         )
 
-        # -----------------------------
         # Task 1
-        # -----------------------------
         task1 = Task(
             description=f"""
 Extract key facts from the following context:
@@ -108,28 +98,28 @@ Extract key facts from the following context:
             agent=researcher
         )
 
-        # -----------------------------
         # Task 2
-        # -----------------------------
         task2 = Task(
             description=f"""
 Explain the following query:
 
 {query}
 
+Recent Conversation History (for context and pronouns):
+{history}
+
 Rules:
 - Simple language
 - Practical explanation
 - No jargon
+- Use the conversation history to understand pronouns like "it" or "that".
 """,
             expected_output="Clear explanation",
             agent=advisor,
             context=[task1]
         )
 
-        # -----------------------------
         # Crew
-        # -----------------------------
         crew = Crew(
             agents=[researcher, advisor],
             tasks=[task1, task2],
