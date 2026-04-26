@@ -31,7 +31,7 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/chat", { // /ai/chat
+      const res = await axios.post("/ai/chat", { // http://127.0.0.1:8000/chat
         query: currentInput,
         session_id: sessionId || undefined,
       });
