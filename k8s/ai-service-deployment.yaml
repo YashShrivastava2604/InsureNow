@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: ai-service
 spec:
   replicas: 3
   strategy:
@@ -11,18 +11,21 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: backend
+      app: ai-service
   template:
     metadata:
       labels:
-        app: backend
+        app: ai-service
     spec:
       containers:
-        - name: backend
-          image: yash4200/insurance-backend:latest
+        - name: ai-service
+          image: yash4200/insurance-ai-service:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 5000
+            - containerPort: 8000
           envFrom:
             - secretRef:
                 name: app-secrets
+          env:
+            - name: BACKEND_URL
+              value: "http://backend:5000"
