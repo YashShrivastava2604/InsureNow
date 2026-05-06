@@ -82,19 +82,5 @@ This project combines a MERN-based insurance platform with advanced AI capabilit
 
 ---
 
-## Architecture (High Level)
-
-Frontend (React)
-↓
-Backend (Node.js / Express)
-↓
-AI Service (Python / FastAPI)
-↓
-Databases (MongoDB + Vector DB)
-↓
-Infrastructure (Docker + Kubernetes)
-
----
-
 ## Auther
 - Yash Shrivastava
